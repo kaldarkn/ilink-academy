@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './Footer.module.scss';
 import iconVK from '../../assets/img/vkontakte.svg';
 import iconHZ from '../../assets/img/hz.svg';
@@ -11,7 +12,7 @@ const Footer = () => {
         <a href="https://vk.com/kaldar">
           <img src={iconVK} alt="vkontakte" />
         </a>
-        <a href="#">
+        <a href="/">
           <img src={iconHZ} alt="hz" />
         </a>
         <a href="https://t.me/thenotoriousmma9">
@@ -22,4 +23,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default React.memo(Footer);

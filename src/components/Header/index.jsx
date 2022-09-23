@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './Header.module.scss';
 import userPhoto from '../../assets/img/photo.jpg';
 import ilinkLogo from '../../assets/img/ilink.svg';
@@ -28,4 +29,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

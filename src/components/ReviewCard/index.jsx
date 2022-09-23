@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './ReviewCard.module.scss';
 
 const ReviewCard = ({ photo, name, date, comment }) => {
@@ -15,4 +16,4 @@ const ReviewCard = ({ photo, name, date, comment }) => {
   );
 };
 
-export default ReviewCard;
+export default React.memo(ReviewCard);
