@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Input.module.scss';
 
-const Input = ({ handleValidation, handleOnBlur, value, children }) => {
+const Input = ({ name, placeholder, handleValidation, handleOnBlur, value, children }) => {
   return (
     <div className={styles.author}>
       <input
@@ -10,8 +10,8 @@ const Input = ({ handleValidation, handleOnBlur, value, children }) => {
         value={value}
         autoComplete="off"
         type="text"
-        name="name"
-        placeholder="Имя Фамилия"
+        name={name}
+        placeholder={placeholder}
         spellCheck={false}
       />
       {children}

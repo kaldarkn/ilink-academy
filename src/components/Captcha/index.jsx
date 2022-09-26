@@ -3,7 +3,7 @@ import captchaImg from '../../assets/img/captcha.png';
 import reload from '../../assets/img/reload.png';
 import styles from './Captcha.module.scss';
 
-const Captcha = ({ handleValidation, handleOnBlur, value, info }) => {
+const Captcha = ({ name, placeholder, handleValidation, handleOnBlur, value, info }) => {
   return (
     <div className={styles.captcha}>
       <div>
@@ -16,8 +16,8 @@ const Captcha = ({ handleValidation, handleOnBlur, value, info }) => {
             onBlur={(e) => handleOnBlur(e)}
             value={value}
             type="text"
-            name="captcha"
-            placeholder="0000"
+            name={name}
+            placeholder={placeholder}
             spellCheck={false}
           />
         </div>
