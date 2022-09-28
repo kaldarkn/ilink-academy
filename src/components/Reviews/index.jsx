@@ -6,7 +6,7 @@ import btnPrev from '../../assets/img/btnPrev.svg';
 import btnNext from '../../assets/img/btnNext.svg';
 import Slider from '../Slider';
 
-const Reviews = ({ handlerOpenForm }) => {
+const Reviews = ({ openForm }) => {
   let [numberOfSliderPages, setNumberOfSliderPages] = useState(0); //кол-во страниц слайдера
   let [currentSliderPage, setCurrentSliderPage] = useState(0); //активная страница слайдера
 
@@ -27,8 +27,8 @@ const Reviews = ({ handlerOpenForm }) => {
       <div className={styles.reviews}>
         <div className={styles.header}>
           <h1>Отзывы</h1>
-          <img onClick={handlerOpenForm} className={styles.bigBtn} src={btnAddBig} alt="add" />
-          <img onClick={handlerOpenForm} className={styles.smallBtn} src={btnAddSmall} alt="add" />
+          <img onClick={openForm} className={styles.bigBtn} src={btnAddBig} alt="add" />
+          <img onClick={openForm} className={styles.smallBtn} src={btnAddSmall} alt="add" />
         </div>
         <Slider
           numberOfSliderPages={numberOfSliderPages}

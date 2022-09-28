@@ -1,13 +1,18 @@
+import axios from 'axios';
+import { useState, createContext, useEffect } from 'react';
 import Header from './components/Header';
 import UserCard from './components/UserCard';
 import Reviews from './components/Reviews';
-import styles from './App.module.scss';
-import userPhoto from './assets/img/photo.jpg';
 import Footer from './components/Footer';
 import Form from './components/Form';
-import { useState } from 'react';
+import SuccessMessage from './components/SuccessMessage';
+import ErrorMessage from './components/ErrorMessage';
+import userPhoto from './assets/img/photo.jpg';
+import styles from './App.module.scss';
 
-const myInfo = {
+const SERVER_PATH = 'http://192.168.0.102:4444';
+
+const MY_INFO = {
   name: 'Калдар Кайрат',
   birthday: '27.06.1996',
   city: 'Томск',
@@ -21,8 +26,26 @@ const myInfo = {
   pet: 'нет',
 };
 
+export const CommentsContext = createContext({});
+
 function App() {
   let [formOpened, setFormOpened] = useState(false);
+  let [fetchSuccess, setFetchSuccess] = useState(false);
+  let [fetchError, setFetchError] = useState(false);
+  let [comments, setComments] = useState([]);
+
+  //Получим все комментарии
+  useEffect(() => {
+    try {
+      axios
+        .get(`${SERVER_PATH}/comments`)
+        .then((res) => setComments(res.data))
+        .catch((err) => alert('Произошла ошибка', err));
+    } catch (error) {
+      console.warn(error);
+      alert('Произошла ошибка при запросе на сервер');
+    }
+  }, [formOpened]);
 
   const handlerOpenForm = () => {
     setFormOpened(!formOpened);
@@ -30,21 +53,27 @@ function App() {
   };
 
   return (
-    <div className={styles.App}>
-      {formOpened && <Form handlerOpenForm={handlerOpenForm} />}
-      <Header />
-      <div className={styles.content}>
-        <h1 className={styles.welcome}>Добро пожаловать в академию!</h1>
-        <img className={styles.avatar} src={userPhoto} alt="user-avatar" />
-        <div className={styles.card}>
-          <UserCard {...myInfo} />
+    <CommentsContext.Provider value={comments}>
+      <div className={styles.App}>
+        {formOpened && (
+          <Form openForm={handlerOpenForm} setSuccess={setFetchSuccess} setError={setFetchError} />
+        )}
+        <Header />
+        <div className={styles.content}>
+          <h1 className={styles.welcome}>Добро пожаловать в академию!</h1>
+          <img className={styles.avatar} src={userPhoto} alt="user-avatar" />
+          <div className={styles.card}>
+            <UserCard {...MY_INFO} />
+          </div>
+          <div className={styles.reviews}>
+            <Reviews openForm={handlerOpenForm} />
+          </div>
         </div>
-        <div className={styles.reviews}>
-          <Reviews handlerOpenForm={handlerOpenForm} />
-        </div>
+        {fetchSuccess && <SuccessMessage onClick={setFetchSuccess} />}
+        {fetchError && <ErrorMessage onClick={setFetchError} />}
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </CommentsContext.Provider>
   );
 }
 

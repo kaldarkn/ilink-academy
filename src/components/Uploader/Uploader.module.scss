@@ -30,6 +30,13 @@
   }
 }
 
+.disabled {
+  background: #8a8a8a;
+  &:hover {
+    background: #8a8a8a;
+  }
+}
+
 @media (max-width: 540px) {
   .uploader {
     width: 58.203125%;

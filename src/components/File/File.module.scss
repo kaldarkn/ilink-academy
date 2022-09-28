@@ -31,6 +31,7 @@
       height: 0.277777778vw;
       background-color: #c2c4ff;
       border-radius: 0.694444444vw;
+      transition: width 0.2s linear;
     }
     progress::-webkit-progress-bar {
       background-color: #c2c4ff;
@@ -45,10 +46,6 @@
     // }
   }
 
-  .spinner {
-    width: 7.46887967%;
-    height: 64.2857143%;
-  }
   .deleteIcon {
     width: 6.22406639%;
     height: 60.7142857%;
@@ -89,10 +86,6 @@
       // }
     }
 
-    .spinner {
-      width: 8.62068966%;
-      height: 6.25vw;
-    }
     .deleteIcon {
       width: 8.62068966%;
       height: 6.25vw;

@@ -1,23 +1,24 @@
 import React from 'react';
-import spinner from '../../assets/img/spinner.gif';
+import Spinner from '../Spinner';
 import iconJpg from '../../assets/img/jpg_icon.png';
 import iconDelete from '../../assets/img/delete.png';
 import iconDeleteHover from '../../assets/img/delete_hover.png';
 import styles from './File.module.scss';
 
-const File = ({ name, size, load, handlerDeleteFile }) => {
+const File = ({ name, size, progressLoaded, load, handlerDeleteFile }) => {
+  // console.log(`${progressLoaded}/${progressTotal}`);
   return (
     <div className={styles.fileInfo}>
       <img className={styles.iconJpg} src={iconJpg} alt="jpg-icon" />
       <div>
         <label>{name}</label>
-        <progress id="file" max="2" value={size}></progress>
+        <progress id="file" max={size} value={progressLoaded}></progress>
       </div>
 
       {load ? (
         <img
-          onClick={handlerDeleteFile}
           className={styles.deleteIcon}
+          onClick={handlerDeleteFile}
           onMouseOver={(e) => {
             e.target.src = iconDeleteHover;
           }}
@@ -28,7 +29,7 @@ const File = ({ name, size, load, handlerDeleteFile }) => {
           alt="delete"
         />
       ) : (
-        <img className={styles.spinner} src={spinner} alt="spinner" />
+        <Spinner />
       )}
     </div>
   );
